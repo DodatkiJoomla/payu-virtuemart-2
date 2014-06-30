@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<install version="1.5" type="plugin" group="vmpayment" method="upgrade">
+    <name>VM - Płatności, PayU/Płatności.pl</name>
+    <creationDate>17.10.2012</creationDate>
+	  <author>Dodatkijoomla.pl</author> 
+	  <copyright>Dodatkijoomla.pl</copyright> 
+	  <license>
+		Wszelkie prawa zastrzeżone - Dodatkijoomla.pl
+	  </license>
+    <authorUrl>http://dodatkijoomla.pl</authorUrl>
+    <version>1.4</version>
+    <description>Plugin płatności online - PayU.</description>
+    <languages></languages>
+    <files>
+		<filename plugin="payu">payu.php</filename>
+    </files>
+    <params addpath="/administrator/components/com_virtuemart/elements">
+	
+		<param type="vmjpluginwarning" />
+		
+		<param type="spacer" default="&lt;b&gt;Podstawowe ustawienia&lt;/b&gt;" />
+
+		<param name="payu_pos_id" type="text"  label="POS ID" description=" &lt;/br&gt; &lt;/br&gt; POS ID - id punktu przyjmującego płatności w systemie PayU." />
+		<param name="payu_md5_1" type="text"  label="Pierwszy klucz (MD5)" description=" &lt;/br&gt; &lt;/br&gt; Klucze przyisane do punktu przyjmującego płatności. Można go znaleźć w zakładce 'Konfiguracja punktu płatności'." />
+		<param name="payu_md5_2" type="text"  label="Drugi klucz (MD5)" description=" &lt;/br&gt; &lt;/br&gt; Klucze przyisane do punktu przyjmującego płatności. Można go znaleźć w zakładce 'Konfiguracja punktu płatności' konta PayU." />	
+		<param name="payu_pos_auth_key" type="text"  label="Klucz autoryzacji płatności (pos_auth_key)" description=" &lt;/br&gt; &lt;/br&gt; Klucz autoryzacji płatności. Można go znaleźć w zakładce 'Konfiguracja punktu płatności' konta PayU." />
+		
+		<param type="spacer" />
+		<param type="spacer" default="&lt;b&gt;Ustawienia URL &lt;/b&gt;" />
+				
+		<param name="url_negatywny" type="text" label="Adres powrotu błędnego (URL negatywny)" description="" size="140" />
+		<param name="url_pozytywny" type="text" label="Adres powrotu pozytywnego (URL pozytywny)" description="" size="140" />
+		<param name="url_online" type="text" label="Adres raportów (URL online)" description="" size="140" />
+		
+		<param type="spacer" />
+		<param type="spacer" default="&lt;b&gt;Ustawienia statusów &lt;/b&gt;" />
+		
+		<param name="status_pending" type="vmorderstate" scope="com_virtuemart" default="P" label="Status zamówienia po złożeniu zamówienia" description="" />
+		<param name="status_success" type="vmorderstate" scope="com_virtuemart" default="C" label="Status zamówienia przy płatności poprawnej" description="" />
+		<param name="status_canceled" type="vmorderstate" scope="com_virtuemart" default="P" label="Status zamówienia przy płatności anulowanej (zalecana pending/oczekująca)" description="" />
+		
+		<param type="spacer" />
+		<param type="spacer" default="&lt;b&gt;Ustawienia dodatkowe &lt;/b&gt;" />
+		
+		<!-- kasa -->
+		<param name="cost_per_transaction" type="text"  label="Opłata dodatkowa wyboru płatności (stała)" description="&lt;/br&gt; &lt;/br&gt; Opłata doliczana do zamówienia, wyrażona w stałych wartościach.&lt;/br&gt; Np. wartość 5, doda 5 PLN (lub domyślnej waluty) do rachunku za używanie tej metody płatności. &lt;/br&gt; Przykładowe wartości: 5, 1.1, -1 " />
+		<param name="cost_percent_total" type="text"  label="Opłata dodatkowa zależna od wartości zamówienia (procent od zamówienia)" description="&lt;/br&gt; &lt;/br&gt; Opłata doliczana do zamówienia, wyrażona w % wartościach zamówienia.&lt;/br&gt; Np. wartość 12, to 12% wartości zamówienia. &lt;/br&gt; Przykładowe wartości: 5 (+5% do wartości zam.), 100 (+100% do wartości zam.), -5.5 " />
+		
+		<param name="tax_id" type="vmtaxes" scope="com_virtuemart"  label="Podatek" description=" &lt;/br&gt; &lt;/br&gt;Stawka podatkowa dla płatności" />
+		<param name="auto_potwierdz" type="radio" default="1" label="Automatycznie potwierdzaj transakcje dla płatoności z wyłączoną opcją 'automatycznego odbioru'. " >
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+
+		<!-- inne -->		
+		<param name="autoredirect" type="radio" default="1" label="Automatyczne przekierowanie" description=" &lt;/br&gt; &lt;/br&gt;Jeśli włączone, skrypt automatycznie przekierowuje użytkownika do systemu płatności po potwierdzeniu zamówienia.&lt;/br&gt;  Jeśli nie - użytkownik bedzie musiał kliknąć w grafikę z pola 'Wybierz grafikę płatności dla podstrony potwierdzenia zamówienia'" >
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+		
+		<param name="powiadomienia" type="radio" default="1" label="Powiadomienia e-mail o zmianie statusu zamówienia" description=" &lt;/br&gt; &lt;/br&gt;Jeśli włączone, wysyła powiadomienie o zmianie statusu zamówienia na adres e-mail klienta.'" >
+			<option value="0">COM_VIRTUEMART_NO</option>
+			<option value="1">COM_VIRTUEMART_YES</option>
+		</param>
+		
+		<!-- wygląd -->		
+		<param name="payment_logos" type="imagelist" directory="images/stories/virtuemart/payment" default="payu.jpg" label="Logo płatności w koszyku i zamówieniu" description=" &lt;/br&gt; &lt;/br&gt;Logo płatności widoczne w koszyku, wyborze płatności i procesie zamówienia. &lt;/br&gt;  &lt;b&gt;  Możesz dodać własne grafiki wrzucając je do katalogu /images/stories/virtuemart/payment &lt;/b&gt;" />	
+		
+		<param name="payment_image" type="imagelist" directory="images/stories/virtuemart/payment" default="payu.jpg" label="Wybierz grafikę płatności dla podstrony potwierdzenia zamówienia" description=" &lt;/br&gt; &lt;/br&gt;Widoczna w ostatnim etapie składania zamówienia. &lt;/br&gt;   &lt;b&gt;Możesz dodać własne grafiki wrzucając je do katalogu /images/stories/virtuemart/payment &lt;/b&gt;" />
+		
+		<param name="checkout_text" type="text" size="100" label="Tekst zamieszony pod grafiką na podstronie potwierdzenia zamówienia" default="Kliknij w powyższą grafikę aby dokonać płatności" />
+
+		<param type="spacer" default="
+		&lt;/td&gt; 
+		&lt;/tr&gt;
+		&lt;/table&gt;
+		&lt;table style='width: 100%'&gt;
+		&lt;tr&gt;
+		&lt;td&gt;
+		
+		&lt;center&gt; 
+
+		&lt;/br&gt; &lt;/br&gt;Stworzone przez:&lt;/br&gt;
+		&lt;a target='_blank' href='http://dodatkijoomla.pl/index.php?payu'&gt;   &lt;img border=0 src='http://dodatkijoomla.pl/images/logo_podpis_site_mini.png'&gt;  &lt;/a&gt;
+		&lt;p&gt; Szukaj najlepszych rozszerzeń dla Joomla na &lt;a target='_blank' href='http://dodatkijoomla.pl/index.php?payu'&gt;DodatkiJoomla.pl &lt;/a&gt;  &lt;/p&gt; 
+		&lt;/center&gt;
+		" />
+    </params>
+</install>
