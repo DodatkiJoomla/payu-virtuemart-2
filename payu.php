@@ -1,10 +1,8 @@
 <?php
-/*
-*			PayU dla Virtuemart 2.0 (Joomla 1.5-2.5) 
-*
-*			Wszelkie prawa zastrzeżone - Dodatkijoomla.pl
-*
-*/
+/**
+ *  @copyright Copyright (c) 2014 DodatkiJoomla.pl
+ *  @license GNU/GPL v2
+ */
 if (!defined('_VALID_MOS') && !defined('_JEXEC')) die('Direct Access to ' . basename(__FILE__) . ' is not allowed.');
 
 

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <install version="1.5" type="plugin" group="vmpayment" method="upgrade">
-    <name>VM - Płatności, PayU/Płatności.pl</name>
-    <creationDate>17.10.2012</creationDate>
-	  <author>Dodatkijoomla.pl</author> 
-	  <copyright>Dodatkijoomla.pl</copyright> 
-	  <license>
-		Wszelkie prawa zastrzeżone - Dodatkijoomla.pl
-	  </license>
+    <name>VM - Płatności, PayU</name>
+    <creationDate>2014-07-07</creationDate>
+	<author>Dodatkijoomla.pl</author> 
+	<copyright>Copyright (c) 2014 DodatkiJoomla.pl</copyright> 
+	<license>GNU/GPL v2</license>
     <authorUrl>http://dodatkijoomla.pl</authorUrl>
     <version>1.4</version>
     <description>Plugin płatności online - PayU.</description>
