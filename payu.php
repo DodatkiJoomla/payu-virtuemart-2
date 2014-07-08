@@ -8,7 +8,9 @@ if (!defined('_VALID_MOS') && !defined('_JEXEC')) die('Direct Access to ' . base
 
 // jeżeli klasa vmPSPlugin nie istnieje, dołącz
 if (!class_exists('vmPSPlugin'))
+{
     require(JPATH_VM_PLUGINS . DS . 'vmpsplugin.php');
+}
 	
 class plgVmPaymentPayu extends vmPSPlugin 
 {
@@ -548,20 +550,6 @@ class plgVmPaymentPayu extends vmPSPlugin
 			
 			return $message;
 	}
-	
-	// dodatkowe koszta płatności (opłaty dodatkowe)
-	// DJ 2013-11-20 Usuwam.
-	/*
-	function getCosts(VirtueMartCart $cart, $method, $cart_prices) 
-	{
-		if (preg_match('/%$/', $method->procentowa_kwota_oplaty)) {
-	    $procentowa_kwota_oplaty = substr($method->procentowa_kwota_oplaty, 0, -1);
-		} else {
-			$procentowa_kwota_oplaty = $method->procentowa_kwota_oplaty;
-		}
-		return ($method->stala_kwota_oplaty + ($cart_prices['salesPrice'] * $procentowa_kwota_oplaty * 0.01));
-    }
-	*/
 	
 	
 	// sprawdź czy płatność spełnia wymagania
