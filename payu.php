@@ -219,8 +219,6 @@ class plgVmPaymentPayu extends vmPSPlugin
 			return false; 
 		}
 		
-		//echo $html;
-		
 		// nazwa płatnosci - zmiana dla Joomla 2.5 !!!
 		if (!($method = $this->getVmPluginMethod($order['details']['BT']->virtuemart_paymentmethod_id))) 
 		{
@@ -256,25 +254,20 @@ class plgVmPaymentPayu extends vmPSPlugin
 				// walidacja
 				if($payment_data['pos_id']==$method->payu_pos_id)
 				{
-					//echo "pos_id ok";
 					$db = &JFactory::getDBO();
 					$q = 'SELECT payu.*, ord.order_status FROM '.$this->_tablename.' as payu JOIN `#__virtuemart_orders` as ord using(virtuemart_order_id) WHERE payu.payu_session_id="' .$payment_data['session_id']. '" ';		
-					//echo $q;
+
 					$db->setQuery($q);
 					$payment_db = $db->loadObject();
 					
-					//var_dump($payment_db);
-					
 					if(!empty($payment_db))
 					{
-						//echo "<br>session id ok";						
 						// sig'i
 						$sig_online = $payment_data['sig'];
-						$sig_db = md5 ( $method->payu_pos_id.$payment_db->payu_session_id.$payment_data['ts'].$method->payu_md5_2 );						
-						//echo "<br>".$sig_db."<br>";
+						$sig_db = md5 ( $method->payu_pos_id.$payment_db->payu_session_id.$payment_data['ts'].$method->payu_md5_2 );
+
 						if($sig_online==$sig_db)
 						{
-							//echo "sig ok";
 							
 							$url = "https://www.platnosci.pl/paygw/UTF/Payment/get/xml";							
 							$ts = time();
@@ -299,12 +292,12 @@ class plgVmPaymentPayu extends vmPSPlugin
 							curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); 
 							curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 							$result=curl_exec ($ch);
-							
-							//var_dump($result);
+
+
 							// xml parse
 							$xml = new SimpleXMLElement($result);
 							$status = $xml->status;
-							echo " Status: ".$status;
+
 							if($status=="OK")
 							{
 								switch($xml->trans->status)
@@ -323,7 +316,7 @@ class plgVmPaymentPayu extends vmPSPlugin
 										}
 										else
 										{
-											//echo "status zmieniony!";
+
 										}
 									}
 									break;
@@ -361,7 +354,7 @@ class plgVmPaymentPayu extends vmPSPlugin
 										}
 										else
 										{
-											//echo "status zmieniony!";
+
 										}
 									}
 									break;
@@ -535,7 +528,7 @@ class plgVmPaymentPayu extends vmPSPlugin
 			{
 				$q = 'UPDATE '.$this->_tablename.' SET modified_on=NOW() WHERE virtuemart_order_id='.$virtuemart_order_id.';   ';
 			}
-			//echo $q;	
+
 			$db->setQuery($q);
 			$wynik = $db->query($q);
 			
@@ -625,7 +618,7 @@ class plgVmPaymentPayu extends vmPSPlugin
 			return null;
 		}
 		
-		// zmiany w wersji 1.1 (1.5 dla p24), ograniczenie generowania się dodatkowego fomrularza, jeśli klient nie opłacił jeszcze zamówienia, tylko do szczegółów produktu
+		//  ograniczenie generowania się dodatkowego fomrularza, jeśli klient nie opłacił jeszcze zamówienia, tylko do szczegółów produktu
 		// dodatkowo w zależności od serwera, tworzenie faktury w PDF głupieje czasami przy obrazkach dla płatności 
 		if(isset($_REQUEST['view']) && $_REQUEST['view']=='orders' && isset($_REQUEST['layout']) && $_REQUEST['layout']=='details')
 		{
@@ -703,7 +696,6 @@ class plgVmPaymentPayu extends vmPSPlugin
 		$data->payment_params .= $url_pozytywny;
 		$data->payment_params .= $url_negatywny;
 		$data->payment_params .= $url_online;
-		//var_dump($data->payment_params);
 		
 		return $this->declarePluginParams('payment', $name, $id, $data);
     }
